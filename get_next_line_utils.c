@@ -6,7 +6,7 @@
 /*   By: jpagacz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 11:19:38 by jpagacz           #+#    #+#             */
-/*   Updated: 2019/11/29 21:27:59 by jpagacz          ###   ########.fr       */
+/*   Updated: 2020/01/07 15:20:38 by jpagacz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,20 @@ size_t	ft_strlen(const char *s)
 	while (s[c] != '\0')
 		c++;
 	return (c);
+}
+
+char	*ft_strcpy(char *dst, const char *src)
+{
+	int i;
+	
+	i = 0;
+	while(src[i] != '\0')
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
 }
 
 void    *ft_memcpy(void *dst, const void *src, size_t n)
@@ -78,11 +92,11 @@ char    *ft_substr(char const *s, unsigned int start, size_t len)
 	return (rval);
 }
 
-static char    *ft_fill_join(char const *s1, char const *s2, int len1, int len2)
+static char	*ft_fill_join(char const *s1, char const *s2, int len1, int len2)
 {
-	int        i;
-	int        j;
-	char    *p;
+	int		i;
+	int		j;
+	char	*p;
 
 	i = 0;
 	j = 0;
@@ -107,9 +121,9 @@ static char    *ft_fill_join(char const *s1, char const *s2, int len1, int len2)
 
 char        *ft_strjoin(char const *s1, char const *s2)
 {
-	int        len1;
-	int        len2;
-	char    *rval;
+	int		len1;
+	int		len2;
+	char	*rval;
 
 	if (!s1 || !s2)
 		return (NULL);
@@ -135,4 +149,19 @@ char	*ft_strchr(const char *s, int c)
 	if (c == 0)
 		return ((char *)s);
 	return (NULL);
+}
+
+void    ft_memdel(void **ap)
+{
+	if (ap != NULL)
+	{
+		free(*ap);
+		*ap = NULL;
+	}
+}
+
+void    ft_strdel(char **as)
+{
+	if (as != NULL && *as != NULL)
+		ft_memdel((void**)as);
 }
