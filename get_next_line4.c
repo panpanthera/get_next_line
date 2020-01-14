@@ -5,37 +5,51 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpagacz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/07 13:12:45 by jpagacz           #+#    #+#             */
-/*   Updated: 2020/01/10 13:23:26 by jpagacz          ###   ########.fr       */
+/*   Created: 2020/01/14 14:35:37 by jpagacz           #+#    #+#             */
+/*   Updated: 2020/01/14 15:52:25 by jpagacz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	get_next_line(int fd, char **line)
+int    get_next_line(int fd, char **line)
 {
-	static char *str;
-	int i;
-	char	buff[BUFFER_SIZE + 1];
-	int		ret;
+	int				ret;
+	int				i;
+	char			buf[BUFFER_SIZE + 1];
+	static char		*reste;
+	char			*tmp;
+	char			*tmp2;
 
-	i = 0;
-	if (!(str = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1))) || fd < 0 || !line)
-		return (-1);
-	while ((ret = read(fd, buff, BUFFER_SIZE)) > 0)
+	while ((ret = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
-		buff[ret] = '\0';
-		if (str == NULL)
-			str = ft_strdup(buff);
-		else 
-			str = ft_strjoin(str, buff);
-		if (str[i])
+		buf[ret] = '\0';
+		if (reste == NULL)
+			reste = ft_strdup(buf);
+		else
 		{
-			while (str[i] != '\n' && str[i])
-				i++;
-			*line = ft_substr(str, 0, i);
-			str = &str[i + 1];
+			tmp = ft_strjoin(reste, buf);
+			free(reste);
+			reste = tmp;
+		}
+	}
+	if (reste[i])
+	{
+		while (reste[i] != '\n' && reste[i])
+			i++;
+		*line = ft_substr(reste, 0, i);
+		tmp2 = ft_strdup(&reste[i + 1]);
+		if (ft_strchr(reste, '\n') == 1)
+		{
+			free(reste);
+			reste = tmp2;
 			return (1);
+		}
+		else
+		{
+			free(reste);
+			reste = tmp2;
+			return (0);
 		}
 	}
 	return (0);

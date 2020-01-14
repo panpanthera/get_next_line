@@ -6,7 +6,7 @@
 /*   By: jpagacz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 11:19:38 by jpagacz           #+#    #+#             */
-/*   Updated: 2020/01/07 15:20:38 by jpagacz          ###   ########.fr       */
+/*   Updated: 2020/01/14 13:58:02 by jpagacz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,34 +134,19 @@ char        *ft_strjoin(char const *s1, char const *s2)
 	return (rval);
 }
 
-char	*ft_strchr(const char *s, int c)
+int			ft_strchr(const char *s, int c)
 {
 	int size;
+	int i;
 
+	i = 0;
 	size = ft_strlen(s) + 1;
 	while (size > 0)
 	{
-		if (*s == c)
-			return ((char *)s);
-		s++;
+		if (s[i] == c)
+			return (1);
+		i++;
 		size--;
 	}
-	if (c == 0)
-		return ((char *)s);
-	return (NULL);
-}
-
-void    ft_memdel(void **ap)
-{
-	if (ap != NULL)
-	{
-		free(*ap);
-		*ap = NULL;
-	}
-}
-
-void    ft_strdel(char **as)
-{
-	if (as != NULL && *as != NULL)
-		ft_memdel((void**)as);
+	return (0);
 }
