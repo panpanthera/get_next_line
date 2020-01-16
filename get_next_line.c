@@ -24,10 +24,11 @@ int	get_next_line(int fd, char **line)
 	i = 0;
 	tmp = 0;
 	tmp2 = 0;
-	if (fd < 0 || !line)
+	if (BUFFER_SIZE < 1 || fd < 0 || !line)
 		return (-1);
-	while ((ret = read(fd, buf, BUFFER_SIZE)) > 0)
-	{		
+	while (ft_strchr(buf, '\n') == -1 && ret)
+	{	
+		ret = read(fd, buf, BUFFER_SIZE);	
 		buf[ret] = '\0';
 		if (reste == NULL)
 			reste = ft_strdup(buf);
