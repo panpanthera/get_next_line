@@ -6,68 +6,63 @@
 /*   By: jpagacz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:35:37 by jpagacz           #+#    #+#             */
-/*   Updated: 2020/01/21 19:17:09 by jpagacz          ###   ########.fr       */
+/*   Updated: 2020/01/23 16:49:06 by jpagacz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+static void			ft_del(char **str)
+{
+	if (str != NULL && *str != NULL)
+	{
+		free(*str);
+		*str = NULL;
+	}
+}
+
 int    get_next_line(int fd, char **line)
 {
-	int				ret;
-	int				i;
-	char			buf[BUFFER_SIZE + 1];
-	static char		*reste;
-	char			*tmp;
-	char			*tmp2;
 
-	i = 0;
+	int			ret;
+	char		*buf;
+	char		*tmp;
+	static char	*reste;
+
 	tmp = NULL;
-	tmp2 = NULL;
-	if (!reste) {
+	if (!(buf = malloc(sizeof(char) * BUFFER_SIZE + 1)))
+		return (-1);
+	if (!reste)
+	{
 		reste = malloc(sizeof(char) * 1);
 		reste[0] = 0;
 	}
-	if (BUFFER_SIZE < 1 || !line || (ret = read(fd, buf, 0) < 0))
+	if (fd < 0 || BUFFER_SIZE < 0 || !line || (ret = read(fd, buf, 0) < 0))
 		return (-1);
-	while ((ret = read(fd, buf, BUFFER_SIZE)) > 0)
+	while ((ft_strchr(reste, '\n') == -1)
+			&& (ret = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[ret] = '\0';
-		if (reste == NULL)
-			reste = ft_strdup(buf);
-		else
-		{
-			tmp = ft_strjoin(reste, buf);
-			free(reste);
-			reste = tmp;
-		}
-		if (ft_strchr(reste, '\n'))
-			break ;
+		reste = ft_strjoin(reste, buf);
 	}
-	if (ft_strchr(reste, '\n'))
-	{
-		while (reste[i] != '\n' && reste[i])
-			i++;
-		*line = ft_substr(reste, 0, i);
-		tmp2 = ft_strdup(&reste[i + 1]);
-		free(reste);			
-		reste = tmp2;
-		return (1);
-	}
-	else if (reste[i] == '\n')
+	free(buf);
+	if (ret < 0)
+		return (-1);
+	if (ret == 0 && (reste == NULL || reste == '\0'))
 	{	
-		*line = ft_substr(reste, 0, i);
-		tmp2 = ft_strdup(&reste[i + 1]);
-		free(reste);			
-		reste = tmp2;
-		return (1);
-	}
-	else
-	{
-		*line = ft_strdup(reste);
-		free(reste);
-		reste = tmp2;
+		*line = ft_strdup("");
+		ft_del(&reste);
 		return (0);
 	}
-	return (1);
+	if ((ret = ft_strchr(reste, '\n')) > -1)
+	{
+		*line = ft_substr(reste, 0, ret);
+		tmp = ft_strdup(&reste[ret + 1]);
+		ft_del(&reste);
+		reste = tmp;
+		return (1);
+	}
+	*line = ft_strdup(reste);
+	ft_del(&reste);
+	return (0);
 }

@@ -1,0 +1,21 @@
+1) enable from everywhere with path
+
+--- If you're using ZSH (iterm)
+mkdir -p ~/.checker/bin
+cp checkproject ~/.checker/bin/
+chmod +x ~/.checker/bin
+echo 'export PATH="$HOME/.checker/bin:$PATH"' >> ~/.zshrc
+
+--- If you're using BASH (terminal)
+mkdir -p ~/.checker/bin
+cp checkproject ~/.checker/bin/
+chmod +x ~/.checker/bin
+echo 'export PATH="$HOME/.checker/bin:$PATH"' >> ~/.bash_profile
+
+
+restart your shell :)
+
+now you can use :
+checkproject show
+
+to see your faults, ending with the norminette :)

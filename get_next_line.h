@@ -1,14 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpagacz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 13:22:18 by jpagacz           #+#    #+#             */
-/*   Updated: 2020/01/13 15:18:06 by jpagacz          ###   ########.fr       */
+/*   Updated: 2020/01/23 12:45:08 by jpagacz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
@@ -22,19 +23,14 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <stdlib.h>
+#include <limits.h>
 
 int			get_next_line(int fd, char **line);
-size_t		ft_strlen(const char *s);
-char		*ft_strnew(size_t size);
-char		*ft_strcat(char *dst, const char *src);
-char		*ft_strcpy(char *dst, const char *src);
+size_t		ft_strlen(char *s);
 void		*ft_memcpy(void *dst, const void *src, size_t n);
-char		*ft_strdup(const char *s1);
-char		*ft_strndup(const char *s1, int n);
-char		*ft_substr(char const *s, unsigned int start, size_t len);
-char		*ft_strjoin(char const *s1, char const *s2);
-int			ft_strchr(const char *s, int c);
-void		ft_memdel(void **ap);
-void		ft_strdel(char **as);
+char		*ft_strdup(char *s1);
+char    *ft_substr(char *s, unsigned int start, size_t len);
+char        *ft_strjoin(char *s1, char *s2);
+int			ft_strchr(char *s, int c);
 
 #endif
