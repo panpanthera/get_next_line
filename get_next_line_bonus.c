@@ -31,7 +31,7 @@ int    get_next_line(int fd, char **line)
 		return (-1);
 	if (!left[fd])
 	{	
-		if(!(left[fd] = (char*)malloc(sizeof(char**) * 1)))
+		if(!(left[fd] = (char*)malloc(sizeof(char) * 1)))
 			return (-1);
 		left[fd][0] = 0;	
 	}		
@@ -59,7 +59,7 @@ int    get_next_line(int fd, char **line)
 	{
 		if (!(*line = ft_substr(left[fd], 0, size)))
 			return (-1);
-		if(!(tmp = ft_strdup(left[size + 1])))
+		if(!(tmp = ft_strdup(&left[fd][size + 1])))
 			return (-1);
 		ft_del(&left[fd]);
 		left[fd] = tmp;

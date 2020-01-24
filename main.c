@@ -20,23 +20,26 @@ int main(int ac, char **av)
 	char *line1;
 	int fd;
 	int fd1;
-	int i;
 
-	i = 0;
-	while (i < ac)
-	{
-		if (!(fd = open(av[i], O_RDONLY)))
-			return (1);
-		i++;
-	}
-	i = 0;
+	(void)ac;	
+	if (!(fd = open(av[1], O_RDONLY)))
+		return (1);
+        if (!(fd1 = open(av[2], O_RDONLY)))
+                return (1);
 	while (get_next_line(fd, &line) == 1)
 	{
 		printf("[%s]\n", line);
 		free(line);
 	}
+	 while (get_next_line(fd1, &line1) == 1)
+        {
+                printf("[%s]\n", line1);
+                free(line1);
+        }
 	printf("[%s]\n", line);
+	printf("[%s]\n", line1);
 	free(line);
+	free(line1);
 	return(0);
 }
 
