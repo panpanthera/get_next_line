@@ -43,6 +43,9 @@ int    get_next_line(int fd, char **line)
 		buf[size] = '\0';
 		if (!(left[fd] = ft_strjoin(left[fd], buf)))
 			return (-1);
+		tmp = left[fd];
+		free(left[fd]);
+		left[fd] = tmp;
 	}
 	free(buf);
 
@@ -58,7 +61,10 @@ int    get_next_line(int fd, char **line)
 	if ((size = ft_strchr(left[fd], '\n')) > -1)
 	{
 		if (!(*line = ft_substr(left[fd], 0, size)))
+		{
+			ft_del(&left[fd]);
 			return (-1);
+		}
 		if(!(tmp = ft_strdup(&left[fd][size + 1])))
 			return (-1);
 		ft_del(&left[fd]);
