@@ -12,11 +12,11 @@
 
 #include "get_next_line_bonus.h"
 
-static void	ft_del(char **str)
+/*static void	ft_del(char **str)
 {
 	free(*str);
 	*str = NULL;
-}
+}*/
 
 int    get_next_line(int fd, char **line)
 {
@@ -31,9 +31,8 @@ int    get_next_line(int fd, char **line)
 		return (-1);
 	if (!left[fd])
 	{	
-		if(!(left[fd] = (char*)malloc(sizeof(char) * 1)))
+		if(!(left[fd] = ft_strdup("")))
 			return (-1);
-		left[fd][0] = 0;	
 	}		
 	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE < 0 || !line || (size = read(fd, buf, 0) < 0))
 		return (-1);
@@ -41,11 +40,19 @@ int    get_next_line(int fd, char **line)
 			&& (size = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[size] = '\0';
-		if (!(left[fd] = ft_strjoin(left[fd], buf)))
-			return (-1);
-		tmp = left[fd];
-		free(left[fd]);
-		left[fd] = tmp;
+		if (left[fd] == NULL)
+		{
+			if(!(left[fd] = ft_strdup(buf)))
+				return(-1);
+		}		
+		else
+		{
+			if (!(left[fd] = ft_strjoin(left[fd], buf)))
+				return (-1);
+			tmp = left[fd];
+			free(left[fd]);
+			left[fd] = tmp;
+		}
 	}
 	free(buf);
 
@@ -55,24 +62,24 @@ int    get_next_line(int fd, char **line)
 	{
 		if (!(*line = ft_strdup("")))
 			return (-1);
-		ft_del(&left[fd]);
 		return (0);
 	}
 	if ((size = ft_strchr(left[fd], '\n')) > -1)
 	{
 		if (!(*line = ft_substr(left[fd], 0, size)))
 		{
-			ft_del(&left[fd]);
+			free(left[fd]);
 			return (-1);
 		}
-		if(!(tmp = ft_strdup(&left[fd][size + 1])))
+		if(!(left[fd] = ft_strdup(&left[fd][size + 1])))
+		{
+			free(left[fd]);
 			return (-1);
-		ft_del(&left[fd]);
-		left[fd] = tmp;
+}
 		return (1);
 	}
 	if (!(*line = ft_strdup(left[fd])))
 		return (-1);
-	ft_del(&left[fd]);
+	free(left[fd]);
 	return (0);
 }

@@ -61,7 +61,7 @@ char    *ft_substr(char *s, unsigned int start, size_t len)
 	return (rval);
 }
 
-static char	*ft_fill_join(char *s1, char *s2, int len1, int len2)
+/*static char	*ft_fill_join(char *s1, char *s2, int len1, int len2)
 {
 	int		i;
 	int		j;
@@ -101,9 +101,9 @@ char		*ft_strjoin(char *s1, char *s2)
 	len2 = ft_strlen(s2);
 	rval = ft_fill_join(s1, s2, len1, len2);
 	return (rval);
-}
+}*/
 
-/*char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char *s1, char *s2)
   {
   char	*str;
   int		i;
@@ -112,24 +112,25 @@ char		*ft_strjoin(char *s1, char *s2)
   i = 0;
   j = 0;
   if (!(str = malloc(sizeof(char) *
-  (ft_strlen(s1) + ft_strlen(s2) + 1))))
+				  (ft_strlen(s1) + ft_strlen(s2) + 1))))
   {
-  free(s1);
-  return (NULL);
+		free(s1);
+	  return (NULL);
   }
   while (s1[i])
   {
-  str[i] = s1[i];
-  i++;
+	  str[i] = s1[i];
+	  i++;
   }
   while (s2[j])
   {
-  str[i + j] = s2[j];
-  j++;
+	  str[i + j] = s2[j];
+	  j++;
   }
   str[i + j] = '\0';
+free(s1);
   return (str);
-  }*/
+  }
 
 
 
