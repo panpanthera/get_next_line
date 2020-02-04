@@ -6,21 +6,20 @@
 /*   By: jpagacz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 10:28:43 by jpagacz           #+#    #+#             */
-/*   Updated: 2020/01/24 13:03:19 by jpagacz          ###   ########.fr       */
+/*   Updated: 2020/02/04 18:12:42 by jpagacz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-/*static void	ft_del(char **str)
+static void	ft_del(char **str)
 {
 	free(*str);
 	*str = NULL;
-}*/
+}
 
-int    get_next_line(int fd, char **line)
+int			get_next_line(int fd, char **line)
 {
-
 	int			size;
 	char		*buf;
 	char		*tmp;
@@ -30,11 +29,12 @@ int    get_next_line(int fd, char **line)
 	if (!(buf = malloc(sizeof(char) * BUFFER_SIZE + 1)))
 		return (-1);
 	if (!left[fd])
-	{	
-		if(!(left[fd] = ft_strdup("")))
+	{
+		if (!(left[fd] = ft_strdup("")))
 			return (-1);
-	}		
-	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE < 0 || !line || (size = read(fd, buf, 0) < 0))
+	}
+	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE < 0
+			|| !line || (size = read(fd, buf, 0) < 0))
 		return (-1);
 	while ((ft_strchr(left[fd], '\n') == -1)
 			&& (size = read(fd, buf, BUFFER_SIZE)) > 0)
@@ -44,17 +44,16 @@ int    get_next_line(int fd, char **line)
 		{
 			if(!(left[fd] = ft_strdup(buf)))
 				return(-1);
-		}		
+		}
 		else
 		{
-			if (!(left[fd] = ft_strjoin(left[fd], buf)))
+			if (!(tmp = ft_strjoin(left[fd], buf)))
 				return (-1);
-			tmp = left[fd];
-			free(left[fd]);
+			ft_del(&left[fd]);
 			left[fd] = tmp;
 		}
 	}
-	free(buf);
+	ft_del(&buf);
 
 	if (size < 0)
 		return (-1);
@@ -62,24 +61,21 @@ int    get_next_line(int fd, char **line)
 	{
 		if (!(*line = ft_strdup("")))
 			return (-1);
+		free(left[fd]);
 		return (0);
 	}
 	if ((size = ft_strchr(left[fd], '\n')) > -1)
 	{
 		if (!(*line = ft_substr(left[fd], 0, size)))
-		{
-			free(left[fd]);
 			return (-1);
-		}
-		if(!(left[fd] = ft_strdup(&left[fd][size + 1])))
-		{
-			free(left[fd]);
+		if (!(tmp = ft_strdup(&left[fd][size + 1])))
 			return (-1);
-}
+		ft_del(&left[fd]);
+		left[fd] = tmp;
 		return (1);
 	}
 	if (!(*line = ft_strdup(left[fd])))
 		return (-1);
-	free(left[fd]);
+	ft_del(&left[fd]);
 	return (0);
 }
