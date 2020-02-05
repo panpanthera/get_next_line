@@ -1,15 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpagacz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/25 13:22:18 by jpagacz           #+#    #+#             */
-/*   Updated: 2020/01/24 10:22:41 by jpagacz          ###   ########.fr       */
+/*   Created: 2020/01/24 10:36:33 by jpagacz           #+#    #+#             */
+/*   Updated: 2020/02/05 13:11:22 by jpagacz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
@@ -18,10 +17,6 @@
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 32
 #endif
-
-# ifndef OPEN_MAX
-#  define OPEN_MAX 65565
-# endif
 
 #include <unistd.h>
 #include <stdio.h>

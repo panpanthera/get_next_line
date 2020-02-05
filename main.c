@@ -6,7 +6,7 @@
 /*   By: jpagacz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:51:16 by jpagacz           #+#    #+#             */
-/*   Updated: 2020/01/24 12:27:22 by jpagacz          ###   ########.fr       */
+/*   Updated: 2020/02/05 11:45:46 by jpagacz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ int main(int ac, char **av)
 		printf("[%s]\n", line);
 		free(line);
 	}
+	printf("[%s]\n", line);
+	free(line);
 	 while (get_next_line(fd1, &line1) == 1)
         {
                 printf("[%s]\n", line1);
                 free(line1);
         }
-	printf("[%s]\n", line);
 	printf("[%s]\n", line1);
-	free(line);
 	free(line1);
 	return(0);
 }

@@ -6,7 +6,7 @@
 /*   By: jpagacz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 10:36:33 by jpagacz           #+#    #+#             */
-/*   Updated: 2020/01/24 10:36:43 by jpagacz          ###   ########.fr       */
+/*   Updated: 2020/02/05 11:55:21 by jpagacz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,6 @@
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 32
 #endif
-
-# ifndef OPEN_MAX
-#  define OPEN_MAX 65565
-# endif
 
 #include <unistd.h>
 #include <stdio.h>

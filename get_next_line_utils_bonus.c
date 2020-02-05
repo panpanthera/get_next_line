@@ -6,11 +6,11 @@
 /*   By: jpagacz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 11:19:38 by jpagacz           #+#    #+#             */
-/*   Updated: 2020/02/04 18:12:40 by jpagacz          ###   ########.fr       */
+/*   Updated: 2020/02/05 16:22:08 by jpagacz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(char *s)
 {
@@ -35,7 +35,6 @@ char    *ft_strdup(char *s1)
 	while (*s1)
 		s2[i++] = *s1++;
 	s2[i] = '\0';
-//	free(s1);
 	return (s2);
 }
 
@@ -59,7 +58,6 @@ char    *ft_substr(char *s, unsigned int start, size_t len)
 		len--;
 	}
 	rval[i] = '\0';
-//	free(s);
 	return (rval);
 }
 
@@ -88,7 +86,6 @@ char	*ft_strjoin(char *s1, char *s2)
 		j++;
 	}
 	str[i + j] = '\0';
-//	free(s1);
 	return (str);
 }
 
