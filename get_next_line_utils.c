@@ -6,7 +6,7 @@
 /*   By: jpagacz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 11:19:38 by jpagacz           #+#    #+#             */
-/*   Updated: 2020/02/05 13:09:59 by jpagacz          ###   ########.fr       */
+/*   Updated: 2020/02/10 17:18:49 by jpagacz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ size_t	ft_strlen(char *s)
 	return (i);
 }
 
-char    *ft_strdup(char *s1)
+char	*ft_strdup(char *s1)
 {
 	size_t	i;
-	char    *s2;
+	char	*s2;
 
 	if (!(s2 = (char *)malloc((ft_strlen(s1) + 1) * sizeof(char))))
 		return (NULL);
@@ -38,16 +38,15 @@ char    *ft_strdup(char *s1)
 	return (s2);
 }
 
-
-char    *ft_substr(char *s, unsigned int start, size_t len)
+char	*ft_substr(char *s, unsigned int start, size_t len)
 {
-	char            *rval;
-	unsigned int    i;
+	char			*rval;
+	unsigned int	i;
 
 	i = start;
 	if (!s)
 		return (NULL);
-	if (i  > ft_strlen(s))
+	if (i > ft_strlen(s))
 		return (NULL);
 	if (!(rval = malloc((len + 1) * sizeof(char))))
 		return (NULL);
@@ -89,9 +88,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (str);
 }
 
-
-
-int			ft_strchr(char *s, int c)
+int		ft_strchr(char *s, int c)
 {
 	int i;
 

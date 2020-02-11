@@ -6,11 +6,10 @@
 /*   By: jpagacz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 10:28:43 by jpagacz           #+#    #+#             */
-/*   Updated: 2020/02/05 16:59:20 by jpagacz          ###   ########.fr       */
+/*   Updated: 2020/02/10 18:07:50 by jpagacz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "get_next_line_utils.c"
 #include "get_next_line_bonus.h"
 
 static void	ft_del(char **str)
@@ -19,10 +18,10 @@ static void	ft_del(char **str)
 	*str = NULL;
 }
 
-int		ft_printLine(char **stock, char **line, int fd)
+int			ft_printline(char **stock, char **line, int fd)
 {
-	int size;
-	char *tmp;
+	int		size;
+	char	*tmp;
 
 	tmp = NULL;
 	if ((size = ft_strchr(stock[fd], '\n')) > -1)
@@ -38,13 +37,12 @@ int		ft_printLine(char **stock, char **line, int fd)
 	if (!(*line = ft_strdup(stock[fd])))
 		return (-1);
 	ft_del(&stock[fd]);
-	ft_del(line);
 	return (0);
 }
 
 int			get_next_line(int fd, char **line)
 {
-	int		size;
+	int			size;
 	char		buf[BUFFER_SIZE + 1];
 	char		*tmp;
 	static char	*stock[FOPEN_MAX];
@@ -59,11 +57,11 @@ int			get_next_line(int fd, char **line)
 	{
 		buf[size] = '\0';
 		if (!stock[fd] && !(stock[fd] = ft_strdup(buf)))
-			return(-1);
+			return (-1);
 		else if (!(tmp = ft_strjoin(stock[fd], buf)))
 			return (-1);
 		ft_del(&stock[fd]);
 		stock[fd] = tmp;
 	}
-	return (ft_printLine(stock, line, fd));
+	return (ft_printline(stock, line, fd));
 }
