@@ -6,7 +6,7 @@
 /*   By: jpagacz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 10:36:33 by jpagacz           #+#    #+#             */
-/*   Updated: 2020/02/10 17:27:55 by jpagacz          ###   ########.fr       */
+/*   Updated: 2020/02/13 08:41:08 by jpagacz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define GET_NEXT_LINE_H
 
 # include <unistd.h>
-# include <stdio.h>
 # include <fcntl.h>
 # include <stdlib.h>
 # include <limits.h>
